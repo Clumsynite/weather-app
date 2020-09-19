@@ -1,6 +1,19 @@
 {
   "name": "weather-app",
   "version": "0.1.0",
+  "description": "Weather app built using vue.js framework",
+  "keywords": [
+    "vue",
+    "js",
+    "framework",
+    "weather",
+    "openweathermap"
+  ],
+  "homepage": "https://clumsynite.github.io/weather-app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Clumsynite/weather-app"
+  },
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
