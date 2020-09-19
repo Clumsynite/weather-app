@@ -1,28 +1,42 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Display />
+    <Search />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Display from "./components/Display";
+import Search from "./components/Search";
+require("dotenv").config();
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
+    Display,
+    Search
+  },
+  methods: {
+    async getWeatherByCity(city) {
+      city = city.trim() === "" ? "Mumbai" : city;
+      const server = "api.openweathermap.org";
+      const key = "3c0d3ab8f66567616f37a8dc9a672b8a";
+      const url = `https://${server}/data/2.5/weather?q=${city}&APPID=${key}`;
+      const response = await fetch(url, { mode: "cors" });
+      return await response.json();
+    },
+    async getWeatherByCoords(lat, lon) {
+      const server = "api.openweathermap.org";
+      const key = "3c0d3ab8f66567616f37a8dc9a672b8a";
+      const url = `https://${server}/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${key}`;
+
+      const response = await fetch(url, { mode: "cors" });
+      const weatherData = await response.json();
+
+      return weatherData;
+    }
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
