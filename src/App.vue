@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <img id="background-img" v-bind:src="gif" alt="" />
+    <img
+      id="background-img"
+      v-bind:src="gif !== '' ? gif : whereAreYou"
+      alt=""
+    />
     <div id="weather-div">
       <Search
         @search-city="getWeatherByCity($event)"
@@ -25,16 +29,26 @@ export default {
     return {
       currentWeather: {},
       weatherCondition: "",
-      gif: ""
+      gif: "",
+      whereAreYou:
+        "https://media1.tenor.com/images/9aade0fc6248deb37fd529cdf39ec7ab/tenor.gif?itemid=12458697"
     };
   },
   methods: {
     async getWeatherByCity(city) {
+      city = city.trim() === "" ? "Mumbai" : city;
+      const url = `q=${city}`;
+      this.getWeather(url);
+    },
+    async getWeatherByCoords(coords) {
+      const url = `lat=${coords.lat}&lon=${coords.lon}`;
+      this.getWeather(url);
+    },
+    async getWeather(query) {
       try {
-        city = city.trim() === "" ? "Mumbai" : city;
         const server = "api.openweathermap.org";
         const key = "3c0d3ab8f66567616f37a8dc9a672b8a";
-        const url = `https://${server}/data/2.5/weather?q=${city}&APPID=${key}`;
+        const url = `https://${server}/data/2.5/weather?${query}&APPID=${key}`;
         const response = await fetch(url, { mode: "cors" });
         if (response.status === 404) {
           alert("city not found");
@@ -48,19 +62,6 @@ export default {
       } catch (e) {
         console.log(e.message);
       }
-    },
-    async getWeatherByCoords(coords) {
-      const server = "api.openweathermap.org";
-      const key = "3c0d3ab8f66567616f37a8dc9a672b8a";
-      const url = `https://${server}/data/2.5/weather?lat=${coords.lat}&lon=${coords.lon}&APPID=${key}`;
-
-      const response = await fetch(url, { mode: "cors" });
-      const weatherData = await response.json();
-
-      console.log(weatherData);
-      this.weatherCondition = weatherData.weather[0].main;
-      this.currentWeather = weatherData;
-      this.getGif(this.weatherCondition);
     },
     async getGif(query) {
       const key = "aIYPP1yuQyj5KBugwlKzgXSHpybIf1dD";
