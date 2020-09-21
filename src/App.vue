@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <img id="background-img" v-bind:src="gif" alt="" />
-    <div id="weather-card">
+    <div id="weather-div">
       <Search
         @search-city="getWeatherByCity($event)"
         @location-clicked="getWeatherByCoords($event)"
       />
-      <Display />
+      <Display v-bind:weather="currentWeather" />
     </div>
   </div>
 </template>
@@ -36,11 +36,14 @@ export default {
         const key = "3c0d3ab8f66567616f37a8dc9a672b8a";
         const url = `https://${server}/data/2.5/weather?q=${city}&APPID=${key}`;
         const response = await fetch(url, { mode: "cors" });
-
+        if (response.status === 404) {
+          alert("city not found");
+          return;
+        }
         const weather = await response.json();
         this.weatherCondition = weather.weather[0].main;
+        this.currentWeather = weather;
         this.getGif(this.weatherCondition);
-        console.log(response.status);
         console.log(weather);
       } catch (e) {
         console.log(e.message);
@@ -56,6 +59,7 @@ export default {
 
       console.log(weatherData);
       this.weatherCondition = weatherData.weather[0].main;
+      this.currentWeather = weatherData;
       this.getGif(this.weatherCondition);
     },
     async getGif(query) {
@@ -76,20 +80,25 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-
+* {
+  margin: 0;
+  padding: 0;
+}
 body {
   margin: 0;
+  padding: 0;
   overflow-y: hidden;
 }
 #background-img {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   z-index: -1;
 }
-#weather-card {
+#weather-div {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 </style>

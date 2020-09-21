@@ -1,14 +1,17 @@
 <template>
   <div id="get">
-    <div id="search">
-      <input type="text" v-model="city" />
+    <div id="get-data">
+      <input
+        type="text"
+        v-model="city"
+        id="get-city"
+        placeholder="Enter City name:"
+      />
       <button v-on:click="searchCity" id="search-btn" class="btn">
-        <i class="material-icons">search</i>
+        <i class="large material-icons">search</i>
       </button>
-    </div>
-    <div>
       <button v-on:click="getUserLocation" id="locate-btn" class="btn">
-        <i class="material-icons">location_on</i>
+        <i class="large material-icons">location_on</i>
       </button>
     </div>
   </div>
@@ -34,7 +37,7 @@ export default {
     },
     getUserLocation() {
       navigator.geolocation.getCurrentPosition(this.locationSuccess, () => {
-        console.log("Unabe to retrieve your Location");
+        console.log("Unable to retrieve your Location");
       });
     },
     async locationSuccess(position) {
@@ -53,17 +56,54 @@ export default {
 <style scoped>
 #get {
   margin-top: 4vh;
-  padding: 20px 20px 0 20px;
+  border-radius: 15px 15px 0 0;
+  border: 2px solid black;
+  border-bottom: none;
+  width: 90vw;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+}
+#get-data {
+  padding: 10px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-  width: 90vw;
-  height: 90vh;
-  border-radius: 15px;
+}
+.btn {
+  background-color: aliceblue;
+  color: #111;
+  border: 1px solid white;
+  outline: none;
+  padding: 5px;
+  width: 100%;
+  background: linear-gradient(to right, black 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.5s ease-out;
+}
+.btn:hover {
+  border: 1px solid black;
+  background-position: left bottom;
+  cursor: pointer;
+}
+#get-city {
+  padding: 10px;
+  font-size: 20px;
+  border: 1px solid white;
+  outline: none;
+  width: 80%;
+}
+#get-city:focus {
+  border: 1px solid black;
 }
 #locate-btn {
-  background: none;
-  border: none;
+  width: 10%;
+}
+#search-btn {
+  width: 10%;
+}
+#locate-btn:hover {
+  color: cyan;
+}
+#search-btn:hover {
+  color: blue;
 }
 </style>
