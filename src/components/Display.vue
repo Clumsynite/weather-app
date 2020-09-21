@@ -11,7 +11,11 @@
           <img :src="icon" alt="" id="weather-icon" />
         </div>
       </div>
-      <div id="temperature-div" @click="toggleUnit">
+      <div
+        id="temperature-div"
+        @click="toggleUnit"
+        title="Click to toggle Standard Unit"
+      >
         Temperature:
         {{ unit === "c" ? `${celsius}&deg;C` : `${fahrenheit}&deg;F` }}
       </div>
@@ -60,7 +64,7 @@ export default {
   },
   methods: {
     toggleUnit() {
-      this.unit === "c" ? "f" : "c";
+      this.unit = this.unit === "c" ? "f" : "c";
     }
   }
 };
@@ -82,21 +86,26 @@ export default {
   text-shadow: 1px 2px 10px black;
 }
 #location {
-  font-size: 28px;
+  font-size: 30px;
   font-weight: bold;
 }
 #weather {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-size: 20px;
 }
 #weather-row {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
+#icon-div img {
+  transform: scale(1.5);
+}
 #temperature-div {
   user-select: none;
+  font-size: 25px;
 }
 #temperature-div:hover {
   cursor: pointer;

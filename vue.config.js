@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: '',
+  publicPath: "",
   pages: {
     index: {
       entry: "src/main.js",
@@ -7,5 +7,5 @@ module.exports = {
       filename: "index.html",
       title: "Weather App"
     }
-  },
-}
+  }
+};
