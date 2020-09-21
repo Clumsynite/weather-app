@@ -16,7 +16,6 @@
 </template>
 
 <script>
-// import { serverBus } from "./main";
 import Display from "./components/Display";
 import Search from "./components/Search";
 
@@ -33,7 +32,7 @@ export default {
       gif: "",
       whereAreYou:
         "https://media1.tenor.com/images/9aade0fc6248deb37fd529cdf39ec7ab/tenor.gif?itemid=12458697",
-    load: false
+      load: false
     };
   },
   methods: {
@@ -78,12 +77,9 @@ export default {
         return;
       }
       this.gif = gif.data.images.original.url;
-    },
-    // sendWeather() {
-    //   serverBus.$emit("get-weather", this.currentWeather);
-    // }
+    }
   }
-}
+};
 </script>
 
 <style>

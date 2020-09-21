@@ -1,19 +1,20 @@
 <template>
   <div id="get">
-    <div id="get-data">
+    <form id="get-data">
       <input
         type="text"
         v-model="city"
         id="get-city"
         placeholder="Enter City name:"
+        autocomplete="off"
       />
-      <button v-on:click="searchCity" id="search-btn" class="btn">
+      <button v-on:click="searchCity" id="search-btn" class="btn" type="submit">
         <i class="large material-icons">search</i>
       </button>
       <button v-on:click="getUserLocation" id="locate-btn" class="btn">
         <i class="large material-icons">location_on</i>
       </button>
-    </div>
+    </form>
   </div>
 </template>
 
@@ -32,6 +33,9 @@ export default {
   },
   methods: {
     searchCity() {
+      if (event) {
+        event.preventDefault();
+      }
       this.$emit("search-city", this.city);
       this.city = "";
     },

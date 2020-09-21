@@ -20,7 +20,6 @@
 </template>
 
 <script>
-
 export default {
   name: "Display",
   data() {
@@ -44,7 +43,7 @@ export default {
       return this.weather.name;
     },
     country: function() {
-      return this.weather.sys.country; 
+      return this.weather.sys.country;
     },
     temperature: function() {
       return this.weather.main.temp;
