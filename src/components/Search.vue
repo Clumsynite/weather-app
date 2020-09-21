@@ -37,7 +37,7 @@ export default {
     },
     getUserLocation() {
       navigator.geolocation.getCurrentPosition(this.locationSuccess, () => {
-        console.log("Unable to retrieve your Location");
+        alert("Unable to retrieve your Location");
       });
     },
     async locationSuccess(position) {

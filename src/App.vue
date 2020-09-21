@@ -10,12 +10,13 @@
         @search-city="getWeatherByCity($event)"
         @location-clicked="getWeatherByCoords($event)"
       />
-      <Display v-bind:weather="currentWeather" />
+      <Display v-if="load" v-bind:weather="currentWeather" />
     </div>
   </div>
 </template>
 
 <script>
+// import { serverBus } from "./main";
 import Display from "./components/Display";
 import Search from "./components/Search";
 
@@ -31,7 +32,8 @@ export default {
       weatherCondition: "",
       gif: "",
       whereAreYou:
-        "https://media1.tenor.com/images/9aade0fc6248deb37fd529cdf39ec7ab/tenor.gif?itemid=12458697"
+        "https://media1.tenor.com/images/9aade0fc6248deb37fd529cdf39ec7ab/tenor.gif?itemid=12458697",
+    load: false
     };
   },
   methods: {
@@ -57,8 +59,10 @@ export default {
         const weather = await response.json();
         this.weatherCondition = weather.weather[0].main;
         this.currentWeather = weather;
+        const iconUrl = `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`;
+        this.currentWeather.icon = iconUrl;
+        this.load = true;
         this.getGif(this.weatherCondition);
-        console.log(weather);
       } catch (e) {
         console.log(e.message);
       }
@@ -74,13 +78,17 @@ export default {
         return;
       }
       this.gif = gif.data.images.original.url;
-    }
+    },
+    // sendWeather() {
+    //   serverBus.$emit("get-weather", this.currentWeather);
+    // }
   }
-};
+}
 </script>
 
 <style>
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -89,6 +97,7 @@ body {
   margin: 0;
   padding: 0;
   overflow-y: hidden;
+  font-family: "Quicksand", sans-serif;
 }
 #background-img {
   position: absolute;
