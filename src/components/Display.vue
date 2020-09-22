@@ -1,6 +1,6 @@
 <template>
   <div id="weather-card">
-    <div id="content" v-if="weather">
+    <div id="content">
       <div id="date">
         {{ date }}
       </div>
@@ -36,13 +36,18 @@
           }}
         </div>
       </div>
+      <Forecast v-bind:coord="coord" />
     </div>
   </div>
 </template>
 
 <script>
+import Forecast from "./Forecast";
 export default {
   name: "Display",
+  components: {
+    Forecast
+  },
   data() {
     return {
       unit: "c",
@@ -78,6 +83,9 @@ export default {
     },
     feelsLike: function() {
       return this.weather.main.feels_like;
+    },
+    coord: function() {
+      return this.weather.coord;
     }
   },
   methods: {
