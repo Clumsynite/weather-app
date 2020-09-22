@@ -1,6 +1,9 @@
 <template>
   <div id="weather-card">
     <div id="content" v-if="weather">
+      <div id="date">
+        {{ date }}
+      </div>
       <div id="location">{{ city }}, {{ country }}</div>
       <div id="weather">
         <div id="weather-row">
@@ -28,13 +31,17 @@ export default {
   name: "Display",
   data() {
     return {
-      unit: "c"
+      unit: "c",
+      date: this.formatDate(new Date())
     };
   },
   props: {
     weather: {
       type: Object
     }
+  },
+  created() {
+    this.startInterval();
   },
   computed: {
     celsius: function() {
@@ -60,11 +67,43 @@ export default {
     },
     weatherDesc: function() {
       return this.weather.weather[0].description;
+    },
+    feelsLike: function() {
+      return this.weather.main.feels_like;
     }
   },
   methods: {
     toggleUnit() {
       this.unit = this.unit === "c" ? "f" : "c";
+    },
+    startInterval() {
+      setInterval(() => {
+        this.date = this.formatDate(new Date());
+      }, 1000);
+    },
+    formatDate(date) {
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+      let ampm = hours >= 12 ? "pm" : "am";
+      let months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+      ];
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      let strTime = `${hours}:${minutes}:${date.getSeconds()} ${ampm}`;
+      return `${strTime}, ${months[date.getMonth()]} ${date.getDate()}`;
     }
   }
 };
@@ -87,6 +126,12 @@ export default {
 }
 #location {
   font-size: 30px;
+  font-weight: bold;
+}
+#date {
+  font-size: 16px;
+  color: black;
+  text-shadow: 1px 1px 20px white;
   font-weight: bold;
 }
 #weather {
