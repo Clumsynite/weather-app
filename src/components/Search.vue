@@ -40,6 +40,9 @@ export default {
       this.city = "";
     },
     getUserLocation() {
+      if (event) {
+        event.preventDefault();
+      }
       navigator.geolocation.getCurrentPosition(this.locationSuccess, () => {
         alert("Unable to retrieve your Location");
       });

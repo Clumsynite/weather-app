@@ -10,7 +10,13 @@
         @search-city="getWeatherByCity($event)"
         @location-clicked="getWeatherByCoords($event)"
       />
-      <Display v-if="load" v-bind:weather="currentWeather" />
+      <transition
+        name="card"
+        enter-active-class="animate__animated animate__fadeIn"
+        leave-active-class="animate__animated animate__fadeOut"
+      >
+        <Display v-if="load" v-bind:weather="currentWeather" />
+      </transition>
     </div>
   </div>
 </template>
@@ -47,6 +53,7 @@ export default {
     },
     async getWeather(query) {
       try {
+        this.load = false;
         const server = "api.openweathermap.org";
         const key = "3c0d3ab8f66567616f37a8dc9a672b8a";
         const url = `https://${server}/data/2.5/weather?${query}&APPID=${key}`;
@@ -85,6 +92,7 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css");
 * {
   margin: 0;
   padding: 0;
