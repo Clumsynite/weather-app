@@ -1,14 +1,18 @@
 <template>
   <div id="weather-card">
     <div id="content">
-      <div id="date">
+      <div id="date" :title="date">
         {{ date }}
       </div>
       <div id="location" :title="city">{{ city }}, {{ country }}</div>
       <div id="weather">
         <div id="weather-row">
-          <div id="weather-name" :title="weatherName">Weather: {{ weatherName }}</div>
-          <div id="weather-like" :title="weatherDesc">Description: {{ weatherDesc }}</div>
+          <div id="weather-name" :title="weatherName">
+            Weather: {{ weatherName }}
+          </div>
+          <div id="weather-like" :title="weatherDesc">
+            Description: {{ weatherDesc }}
+          </div>
         </div>
         <div id="icon-div">
           <img :src="icon" alt="" id="weather-icon" />
@@ -19,7 +23,7 @@
         @click="toggleUnit"
         title="Click to toggle Standard Unit"
       >
-        <div id="temp" >
+        <div id="temp">
           Temperature:
           {{
             unit === "c"
@@ -148,6 +152,7 @@ export default {
 #location {
   font-size: 30px;
   font-weight: bold;
+  margin-top: 10px;
 }
 #date {
   font-size: 16px;
@@ -178,9 +183,10 @@ export default {
 }
 #temperature-div:hover {
   cursor: pointer;
+  color: yellow;
 }
 
-@media screen and (max-width: 720px){
+@media screen and (max-width: 720px) {
   #weather-card {
     width: 90vw;
   }

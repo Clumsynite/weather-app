@@ -113,10 +113,9 @@ export default {
 #search-btn:hover {
   color: blue;
 }
-@media screen and (max-width: 720px){
+@media screen and (max-width: 720px) {
   #get {
     width: 90vw;
   }
 }
-
 </style>

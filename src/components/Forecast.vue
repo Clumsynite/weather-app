@@ -14,7 +14,11 @@
       <div class="cell-weather">
         {{ getWeather(day) }}
       </div>
-      <div class="cell-temp" @click="toggleUnit" title="CLick here to toggle Standard Unit">
+      <div
+        class="cell-temp"
+        @click="toggleUnit"
+        title="CLick here to toggle Standard Unit"
+      >
         {{
           unit === "c"
             ? `${getTemperature(day)}&deg;C`
