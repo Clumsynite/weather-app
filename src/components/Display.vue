@@ -19,8 +19,13 @@
         @click="toggleUnit"
         title="Click to toggle Standard Unit"
       >
+      <div id="temp">
         Temperature:
-        {{ unit === "c" ? `${celsius}&deg;C` : `${fahrenheit}&deg;F` }}
+        {{ unit === "c" ? `${celsius(temperature)}&deg;C` : `${fahrenheit(temperature)}&deg;F` }}
+      </div>
+      <div id="feels-like">Feels like: 
+        {{ unit === "c" ? `${celsius(feelsLike)}&deg;C` : `${fahrenheit(feelsLike)}&deg;F` }}
+      </div>
       </div>
     </div>
   </div>
@@ -44,12 +49,6 @@ export default {
     this.startInterval();
   },
   computed: {
-    celsius: function() {
-      return (this.temperature - 273.15).toFixed(2);
-    },
-    fahrenheit: function() {
-      return ((this.temperature * 9) / 5 - 459.67).toFixed(2);
-    },
     city: function() {
       return this.weather.name;
     },
@@ -104,7 +103,13 @@ export default {
       minutes = minutes < 10 ? "0" + minutes : minutes;
       let strTime = `${hours}:${minutes}:${date.getSeconds()} ${ampm}`;
       return `${strTime}, ${months[date.getMonth()]} ${date.getDate()}`;
-    }
+    },
+    celsius: function(value) {
+      return (value - 273.15).toFixed(2);
+    },
+    fahrenheit: function(value) {
+      return ((value * 9) / 5 - 459.67).toFixed(2);
+    },
   }
 };
 </script>
@@ -151,6 +156,9 @@ export default {
 #temperature-div {
   user-select: none;
   font-size: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 #temperature-div:hover {
   cursor: pointer;
