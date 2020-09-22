@@ -19,13 +19,22 @@
         @click="toggleUnit"
         title="Click to toggle Standard Unit"
       >
-      <div id="temp">
-        Temperature:
-        {{ unit === "c" ? `${celsius(temperature)}&deg;C` : `${fahrenheit(temperature)}&deg;F` }}
-      </div>
-      <div id="feels-like">Feels like: 
-        {{ unit === "c" ? `${celsius(feelsLike)}&deg;C` : `${fahrenheit(feelsLike)}&deg;F` }}
-      </div>
+        <div id="temp">
+          Temperature:
+          {{
+            unit === "c"
+              ? `${celsius(temperature)}&deg;C`
+              : `${fahrenheit(temperature)}&deg;F`
+          }}
+        </div>
+        <div id="feels-like">
+          Feels like:
+          {{
+            unit === "c"
+              ? `${celsius(feelsLike)}&deg;C`
+              : `${fahrenheit(feelsLike)}&deg;F`
+          }}
+        </div>
       </div>
     </div>
   </div>
@@ -109,7 +118,7 @@ export default {
     },
     fahrenheit: function(value) {
       return ((value * 9) / 5 - 459.67).toFixed(2);
-    },
+    }
   }
 };
 </script>
