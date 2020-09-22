@@ -132,7 +132,6 @@ export default {
   border-top: none;
   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
 }
-
 #content {
   padding: 10px;
   color: white;
