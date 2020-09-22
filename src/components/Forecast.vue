@@ -2,6 +2,7 @@
   <transition-group
     id="forecast-div"
     enter-active-class="animate__animated animate__fadeIn animate__slow"
+    title="09:00 am Forecast"
   >
     <div class="cell" v-for="day in forecast" :key="day.main.temp">
       <div class="cell-day">
@@ -13,7 +14,7 @@
       <div class="cell-weather">
         {{ getWeather(day) }}
       </div>
-      <div class="cell-temp" @click="toggleUnit">
+      <div class="cell-temp" @click="toggleUnit" title="CLick here to toggle Standard Unit">
         {{
           unit === "c"
             ? `${getTemperature(day)}&deg;C`
@@ -116,6 +117,8 @@ export default {
   justify-content: space-between;
   flex-wrap: wrap;
   margin-top: 40px;
+  padding: 5px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
 }
 .cell {
   display: flex;
@@ -132,6 +135,11 @@ export default {
   .weather-icon {
     height: 15vw;
     width: 15vw;
+  }
+}
+@media screen and (max-width: 360px) {
+  #forecast-div {
+    flex-wrap: wrap;
   }
 }
 </style>

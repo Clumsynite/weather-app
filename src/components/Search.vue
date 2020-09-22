@@ -66,7 +66,7 @@ export default {
   border-radius: 15px 15px 0 0;
   border: 2px solid black;
   border-bottom: none;
-  width: 90vw;
+  width: 560px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
 }
 #get-data {
@@ -113,4 +113,10 @@ export default {
 #search-btn:hover {
   color: blue;
 }
+@media screen and (max-width: 720px){
+  #get {
+    width: 90vw;
+  }
+}
+
 </style>
