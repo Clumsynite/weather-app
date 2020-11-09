@@ -25,7 +25,7 @@ export default {
     return {
       userLat: "",
       userLon: "",
-      city: ""
+      city: "",
     };
   },
   created() {
@@ -55,8 +55,8 @@ export default {
       this.userLon = lon;
 
       this.$emit("location-clicked", { lat, lon });
-    }
-  }
+    },
+  },
 };
 </script>
 

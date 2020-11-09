@@ -50,18 +50,18 @@ import Forecast from "./Forecast";
 export default {
   name: "Display",
   components: {
-    Forecast
+    Forecast,
   },
   data() {
     return {
       unit: "c",
-      date: this.formatDate(new Date())
+      date: this.formatDate(new Date()),
     };
   },
   props: {
     weather: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   created() {
     this.startInterval();
@@ -90,7 +90,7 @@ export default {
     },
     coord: function() {
       return this.weather.coord;
-    }
+    },
   },
   methods: {
     toggleUnit() {
@@ -117,7 +117,7 @@ export default {
         "Sep",
         "Oct",
         "Nov",
-        "Dec"
+        "Dec",
       ];
       hours = hours % 12;
       hours = hours ? hours : 12;
@@ -130,8 +130,8 @@ export default {
     },
     fahrenheit: function(value) {
       return ((value * 9) / 5 - 459.67).toFixed(2);
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -35,13 +35,13 @@ export default {
   data() {
     return {
       forecastAll: [],
-      unit: "c"
+      unit: "c",
     };
   },
   props: {
     coord: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   mounted() {
     this.getForecast(this.coord.lat, this.coord.lon);
@@ -78,7 +78,7 @@ export default {
         "Sep",
         "Oct",
         "Nov",
-        "Dec"
+        "Dec",
       ];
       let month = months[Number(string.split("-")[1] - 1)];
       return `${day} ${month}`;
@@ -102,15 +102,15 @@ export default {
     getWeatherIcon: function(code) {
       const iconUrl = `http://openweathermap.org/img/wn/${code.weather[0].icon}@2x.png`;
       return iconUrl;
-    }
+    },
   },
   computed: {
     forecast: function() {
       return this.forecastAll.filter((val, i) => {
         return (i + 1) % 8 === 0;
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
