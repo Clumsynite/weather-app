@@ -29,7 +29,7 @@ export default {
   name: "App",
   components: {
     Display,
-    Search
+    Search,
   },
   data() {
     return {
@@ -38,7 +38,7 @@ export default {
       gif: "",
       whereAreYou:
         "https://media1.tenor.com/images/9aade0fc6248deb37fd529cdf39ec7ab/tenor.gif?itemid=12458697",
-      load: false
+      load: false,
     };
   },
   methods: {
@@ -83,9 +83,14 @@ export default {
           "https://media2.giphy.com/media/dgeIH5RPynA6Q/giphy.gif?cid=ecf05e47537da5bxohc1alhzkdysjjomkrvi1775sxh5sl5x&rid=giphy.gif";
         return;
       }
+      if (query.toLowerCase() === "smoke") {
+        this.gif =
+          "https://media0.giphy.com/media/RI42LtoMA5mxi/giphy.gif?cid=ecf05e47g5rdpu0rx3ld1fec1womp523ajp60dybx8h7643k&rid=giphy.gif";
+        return;
+      }
       this.gif = gif.data.images.original.url;
-    }
-  }
+    },
+  },
 };
 </script>
 
